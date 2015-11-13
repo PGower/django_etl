@@ -1,4 +1,8 @@
 class ETLPipeLine(object):
+    def __init__(self, stdout, stderr):
+        self.stdout = stdout
+        self.stderr = stderr
+
     def setup(self):
         '''
         Perform any setup actions required to extract the data
@@ -28,3 +32,4 @@ class ETLPipeLine(object):
         Perform cleanup actions required as a counterpart to setup
         '''
         pass
+

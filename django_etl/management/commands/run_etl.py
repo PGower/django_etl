@@ -9,6 +9,9 @@ from django.utils.module_loading import import_string
 
 logger = logging.getLogger(__name__)
 
+# TODO
+# Fix the fact that run etl swallows errors and does not report them
+
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
@@ -41,7 +44,7 @@ class Command(BaseCommand):
                         self._output('Skipping pipeline {} because it was not specified in the --only option'.format(qual_path), 1)
                         continue
                 name = pipeline.__name__
-                p = pipeline()
+                p = pipeline(self.stdout, self.stderr)
                 logger.info('Running django_etl pipeline {}'.format(name))
                 p.setup()
                 logger.debug('Completed setup() for django_etl pipeline {}'.format(name))
